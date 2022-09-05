@@ -1,0 +1,16 @@
+<table>
+    <thead>
+    <tr>
+        <th>제목</th>
+        <th>작성일시</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="question : ${questionList}">
+        <td th:text="${question.subject}"></td>
+        <td th:text="${question.createDate}"></td>
+    </tr>
+    <!-- questionController에서 Model객체에 addAttribute() 메서드로 questionList를 사용한다.-->
+    <!-- questionList는 questionRepository의 findAll()메서드를 실행해 얻은 리스트다.-->
+    </tbody>
+</table>

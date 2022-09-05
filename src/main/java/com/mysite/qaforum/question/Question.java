@@ -1,10 +1,11 @@
-package com.mysite.qaforum;
+package com.mysite.qaforum.question;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.*;
 
+import com.mysite.qaforum.answer.Answer;
 import lombok.Getter;
 import lombok.Setter;
 

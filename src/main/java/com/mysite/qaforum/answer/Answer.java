@@ -1,5 +1,6 @@
-package com.mysite.qaforum;
+package com.mysite.qaforum.answer;
 
+import com.mysite.qaforum.question.Question;
 import lombok.Getter;
 import lombok.Setter;
 

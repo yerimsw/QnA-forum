@@ -1,4 +1,4 @@
-package com.mysite.qaforum;
+package com.mysite.qaforum.question;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
