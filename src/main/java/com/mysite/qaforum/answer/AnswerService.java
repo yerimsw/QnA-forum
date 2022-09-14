@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 @Service
 public class AnswerService {
-    AnswerRepository answerRepository;
+    private final AnswerRepository answerRepository;
     public void create(Question question, String content) {
         Answer answer = new Answer();
         answer.setContent(content);
