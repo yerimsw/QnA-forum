@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+@RequestMapping("/question")
 @RequiredArgsConstructor // final 키워드가 붙은 질문 리포지토리를 초기화하는 생성자를 만든다.
 @Controller
 public class QuestionController {
@@ -20,7 +21,7 @@ public class QuestionController {
         return "redirect:/question/list"; // 질문목록 나타내기 위해
     }
 
-    @RequestMapping("/question/list") // localhost:8080/question/list url에 매핑되는 컨트롤러
+    @RequestMapping("/list") // localhost:8080/question/list url에 매핑되는 컨트롤러
     public String list(Model model){
         List<Question> questionList = this.questionService.getList();
         model.addAttribute("questionList",questionList);
@@ -29,7 +30,7 @@ public class QuestionController {
         return "question_list";
     }
 
-    @RequestMapping("/question/detail/{question_id}")
+    @RequestMapping("/detail/{question_id}")
     public String detail(Model model, @PathVariable("question_id")Integer id){
         Question question = this.questionService.getQuestion(id);
         model.addAttribute("question",question);
