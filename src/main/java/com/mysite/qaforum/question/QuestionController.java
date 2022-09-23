@@ -3,9 +3,7 @@ package com.mysite.qaforum.question;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,5 +35,17 @@ public class QuestionController {
         // question_detail.html에 question이라는 이름으로 데이터를 전달한다.
         // 서비스객체에서 id로 Question 객체를 찾아 반환하는 getQuestion(id)메서드를 사용한다.
         return "question_detail";
+    }
+
+    @GetMapping("/create")
+    public String questionCreate() {
+        return "question_form";
+    } // 질문등록 버튼을 누르면 질문등록 페이지로 넘겨준다.
+
+    @PostMapping("/create")
+    public String questionCreate(@RequestParam String subject, @RequestParam String content) {
+        // @RequestParam 매개변수 명은 post로 데이터를 받은 label, id, name과 같아야함.
+        this.questionService.create(subject,content);
+        return "redirect:/question/list"; // 질문 등록 완료 후 목록페이지로 리턴
     }
 }
