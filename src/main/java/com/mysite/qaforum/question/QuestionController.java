@@ -1,5 +1,6 @@
 package com.mysite.qaforum.question;
 
+import com.mysite.qaforum.answer.AnswerForm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +32,7 @@ public class QuestionController {
     }
 
     @RequestMapping("/detail/{question_id}")
-    public String detail(Model model, @PathVariable("question_id")Integer id){
+    public String detail(Model model, @PathVariable("question_id")Integer id, AnswerForm answerForm){
         Question question = this.questionService.getQuestion(id);
         model.addAttribute("question",question);
         // question_detail.html에 question이라는 이름으로 데이터를 전달한다.
