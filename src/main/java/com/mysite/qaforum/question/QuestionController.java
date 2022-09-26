@@ -3,8 +3,10 @@ package com.mysite.qaforum.question;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping("/question")
@@ -38,14 +40,15 @@ public class QuestionController {
     }
 
     @GetMapping("/create")
-    public String questionCreate() {
+    public String questionCreate(QuestionForm questionForm) {
         return "question_form";
     } // 질문등록 버튼을 누르면 질문등록 페이지로 넘겨준다.
 
     @PostMapping("/create")
-    public String questionCreate(@RequestParam String subject, @RequestParam String content) {
-        // @RequestParam 매개변수 명은 post로 데이터를 받은 label, id, name과 같아야함.
-        this.questionService.create(subject,content);
+    public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult) {
+        // HTML에서 subject와 content 데이터가 담긴 form이 전송되면 QuestionForm의 subject와 content가 자동으로 바인딩 된다.
+        if(bindingResult.hasErrors()) return "question_form"; // @Valid로 검증을 수행하여, 오류가 있는 경우 질문 등록 화면으로 돌아온다.
+        this.questionService.create(questionForm.getSubject(), questionForm.getContent());
         return "redirect:/question/list"; // 질문 등록 완료 후 목록페이지로 리턴
     }
 }
