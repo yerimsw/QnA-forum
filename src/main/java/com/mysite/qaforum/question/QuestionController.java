@@ -2,6 +2,7 @@ package com.mysite.qaforum.question;
 
 import com.mysite.qaforum.answer.AnswerForm;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,9 +24,9 @@ public class QuestionController {
     }
 
     @RequestMapping("/list") // localhost:8080/question/list url에 매핑되는 컨트롤러
-    public String list(Model model){
-        List<Question> questionList = this.questionService.getList();
-        model.addAttribute("questionList",questionList);
+    public String list(Model model,@RequestParam(value="page", defaultValue = "0") int page) {
+        Page<Question> paging = this.questionService.getList(page);
+        model.addAttribute("paging",paging);
         // Model 객체에 리스트 객체를 저장한다.
         // 컨트롤러가 리턴하는 question_list.html에서 "questionList" 이름으로 questionList 리스트 객체를 사용할 수 있다.
         return "question_list";
